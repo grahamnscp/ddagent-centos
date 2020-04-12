@@ -2,12 +2,13 @@
 Docker image to test various services in containers
 
 ## Build the image based on centos 7 with systemd
-
+```
 docker build --rm --no-cache -t datadog-centos:1.0 .
+```
 
 
 ## Start a container instance to test an app with the datadog agent
-
+```
 export DD_AGENT_MAJOR_VERSION=7
 export DD_API_KEY=<your datadog API key here>
 export DD_SITE=datadoghq.eu
@@ -23,12 +24,12 @@ docker run -d --privileged --name ${CONTAINER_NAME} \
                -e DD_API_KEY=${DD_API_KEY} \
                -e DD_SITE=${DD_SITE} \
                datadog-centos:1.0
+```
 
 
 ## Install and enable the datadog agent
-
 note: we can't do this when we build the image as the container needs to be running with the init entrypoint first before we start the agent with systemd.
-
+```
 docker exec -it ${CONTAINER_NAME} bash
 /dd-agent-install_script.sh
 systemctl enable datadog-agent
@@ -37,3 +38,4 @@ systemctl start datadog-agent
 # systemctl restart datadog-agent
 updatedb
 exit
+```
