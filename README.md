@@ -39,3 +39,22 @@ systemctl start datadog-agent
 updatedb
 exit
 ```
+
+## Example running Tomcat and datadog agent with tomcat monitoring enabled
+```
+[root@ddagent-centos1 /]# ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Apr09 ?        00:00:04 /usr/sbin/init
+root        17     1  0 Apr09 ?        00:01:52 /usr/lib/systemd/systemd-journald
+root        18     1  0 Apr09 ?        00:00:00 /usr/sbin/crond -n
+root       128     1  0 Apr09 ?        00:00:59 /usr/sbin/rsyslogd -n
+dbus       515     1  0 Apr09 ?        00:00:02 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+tomcat    2080     1  0 Apr09 ?        00:04:06 /usr/lib/jvm/jre/bin/java -classpath /usr/share/tomcat/bin/bootstrap.jar:/usr/share/tomcat/bin/tomcat-j
+dd-agent  2430     1  0 Apr09 ?        00:24:39 /opt/datadog-agent/bin/agent/agent run -p /opt/datadog-agent/run/agent.pid
+dd-agent  2431     1  0 Apr09 ?        00:01:15 /opt/datadog-agent/embedded/bin/process-agent --config=/etc/datadog-agent/datadog.yaml --sysprobe-confi
+dd-agent  2432     1  0 Apr09 ?        00:03:24 /opt/datadog-agent/embedded/bin/trace-agent --config /etc/datadog-agent/datadog.yaml --pid /opt/datadog
+dd-agent  2503  2430  0 Apr09 ?        00:06:04 java -Xmx200m -Xms50m -classpath /opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar org.datadog.jmxfetc
+root      2753     1  0 Apr09 ?        00:00:01 /usr/lib/systemd/systemd-logind
+root     24033     0  0 19:00 pts/0    00:00:00 bash
+root     24095 24033  0 19:01 pts/0    00:00:00 ps -ef
+```
