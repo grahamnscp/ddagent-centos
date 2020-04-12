@@ -40,7 +40,7 @@ updatedb
 exit
 ```
 
-## Example running Tomcat and datadog agent with tomcat monitoring enabled
+## Example running Tomcat, rsyslog and datadog agent with tomcat monitoring enabled
 ```
 [root@ddagent-centos1 /]# ps -ef
 UID        PID  PPID  C STIME TTY          TIME CMD
